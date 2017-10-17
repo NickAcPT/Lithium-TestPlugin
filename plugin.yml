@@ -1,0 +1,8 @@
+ name: LithiumTest
+ version: 1.1-BETA
+ description: TESTING
+ author: NickAc
+
+ main: net.nickac.testing.lithium.LithiumTest
+
+ depend: [Lithium]
