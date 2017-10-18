@@ -37,7 +37,8 @@ import org.bukkit.entity.Player;
 public class OverlayPlayer {
 	private Player handle;
 	private LOverlay o = new LOverlay();
-	private LTextLabel[] labels = new LTextLabel[]{};
+	private final int numberLines = 4;
+	private LTextLabel[] labels = new LTextLabel[numberLines];
 
 	public OverlayPlayer(Player handle) {
 		this.handle = handle;
@@ -67,10 +68,9 @@ public class OverlayPlayer {
 
 	private void startOverlaying() {
 		labels[0] = new LTextLabel(ChatColor.GOLD + "Server Overlay Mod");
-		labels[1] = (LTextLabel) new LTextLabel(ChatColor.GOLD + "Server Overlay Mod").setLocation(new Point(0, 20));
-		labels[2] = (LTextLabel) new LTextLabel(getOverlayLine(1)).setLocation(new Point(0, 30));
-		labels[3] = (LTextLabel) new LTextLabel(getOverlayLine(2)).setLocation(new Point(0, 40));
-		labels[4] = (LTextLabel) new LTextLabel(getOverlayLine(3)).setLocation(new Point(0, 50));
+		labels[1] = (LTextLabel) new LTextLabel(getOverlayLine(1)).setLocation(new Point(0, 20));
+		labels[2] = (LTextLabel) new LTextLabel(getOverlayLine(2)).setLocation(new Point(0, 30));
+		labels[3] = (LTextLabel) new LTextLabel(getOverlayLine(3)).setLocation(new Point(0, 40));
 		for (int i = 0; i < labels.length; i++) {
 			o.addControl(labels[i]);
 		}

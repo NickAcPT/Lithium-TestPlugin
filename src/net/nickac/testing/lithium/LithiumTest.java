@@ -102,6 +102,7 @@ public class LithiumTest extends JavaPlugin {
 					if (LithiumPlugin.getInstance().getPlayerManager().isUsingLithium(e.getPlayer())) {
 						if (overlayPlayers.containsKey(e.getPlayer().getUniqueId())) {
 							e.getPlayer().sendMessage(ChatColor.RED + "You already have the overlay!");
+							return;
 						}
 						OverlayPlayer pl = new OverlayPlayer(e.getPlayer());
 						overlayPlayers.put(e.getPlayer().getUniqueId(), pl);
