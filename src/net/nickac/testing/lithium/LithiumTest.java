@@ -5,7 +5,6 @@ import net.nickac.lithium.backend.controls.impl.*;
 import net.nickac.lithium.backend.other.objects.Point;
 import net.nickac.lithium.frontend.LithiumPlugin;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
@@ -21,7 +20,7 @@ import java.util.UUID;
  */
 public class LithiumTest extends JavaPlugin {
 
-	Map<UUID, LTextLabel> lbls = new HashMap<>();
+	private Map<UUID, OverlayPlayer> overlayPlayers = new HashMap<>();
 
 	@Override
 	public void onEnable() {
@@ -30,10 +29,8 @@ public class LithiumTest extends JavaPlugin {
 
 			@EventHandler
 			public void on(PlayerMoveEvent e) {
-				if (e.getFrom().getX() != e.getTo().getX() || e.getFrom().getZ() != e.getTo().getZ()) {
-					for (Map.Entry<UUID, LTextLabel> u : lbls.entrySet()) {
-						u.getValue().setText(ChatColor.GOLD + "X:" + Bukkit.getPlayer(u.getKey()).getLocation().getBlockX());
-					}
+				if (overlayPlayers.containsKey(e.getPlayer().getUniqueId())) {
+					overlayPlayers.get(e.getPlayer().getUniqueId()).updateOverlay();
 				}
 			}
 
@@ -95,13 +92,8 @@ public class LithiumTest extends JavaPlugin {
 				} else if (e.getMessage().equals("/overlaytest")) {
 					e.setCancelled(true);
 					if (LithiumPlugin.getInstance().getPlayerManager().isUsingLithium(e.getPlayer())) {
-						LOverlay o = new LOverlay();
 
-						o.addControl(new LTextLabel(ChatColor.GOLD + "NickAc OverlayMod"));
-						LTextLabel c = new LTextLabel(ChatColor.GOLD + "X: ");
-						lbls.put(e.getPlayer().getUniqueId(), c);
-						o.addControl(c, 0, 20, 0, 0);
-						LithiumPlugin.getInstance().getPlayerManager().getPlayer(e.getPlayer()).openOverlay(o);
+
 					}
 				}
 			}
