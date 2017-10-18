@@ -5,10 +5,12 @@ import net.nickac.lithium.backend.controls.impl.*;
 import net.nickac.lithium.backend.other.objects.Point;
 import net.nickac.lithium.frontend.LithiumPlugin;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.HashMap;
@@ -32,6 +34,12 @@ public class LithiumTest extends JavaPlugin {
 				if (overlayPlayers.containsKey(e.getPlayer().getUniqueId())) {
 					overlayPlayers.get(e.getPlayer().getUniqueId()).updateOverlay();
 				}
+			}
+
+
+			@EventHandler
+			public void on(PlayerQuitEvent e) {
+				overlayPlayers.remove(e.getPlayer().getUniqueId());
 			}
 
 
@@ -92,8 +100,13 @@ public class LithiumTest extends JavaPlugin {
 				} else if (e.getMessage().equals("/overlaytest")) {
 					e.setCancelled(true);
 					if (LithiumPlugin.getInstance().getPlayerManager().isUsingLithium(e.getPlayer())) {
-
-
+						if (overlayPlayers.containsKey(e.getPlayer().getUniqueId())) {
+							e.getPlayer().sendMessage(ChatColor.RED + "You already have the overlay!");
+						}
+						OverlayPlayer pl = new OverlayPlayer(e.getPlayer());
+						overlayPlayers.put(e.getPlayer().getUniqueId(), pl);
+					} else {
+						e.getPlayer().sendMessage(ChatColor.RED + "You must be using Lithium in order to see the overlay!");
 					}
 				}
 			}
