@@ -31,8 +31,9 @@ public class LithiumTest extends JavaPlugin {
 
 			@EventHandler
 			public void on(PlayerMoveEvent e) {
-				if (overlayPlayers.containsKey(e.getPlayer().getUniqueId())) {
+				try {
 					overlayPlayers.get(e.getPlayer().getUniqueId()).updateOverlay();
+				} catch (NullPointerException ignored) {
 				}
 			}
 
@@ -62,7 +63,6 @@ public class LithiumTest extends JavaPlugin {
 						LTextLabel label = new LTextLabel("Registration");
 
 						LCheckBox checkBox = new LCheckBox("Test");
-
 
 
 						screen.addControl(label, 0, 10, 100, 20);
@@ -96,7 +96,7 @@ public class LithiumTest extends JavaPlugin {
 							Bukkit.getPlayer(invoker).sendMessage("§4§lCheckBox checked ? §6" + checkBox.isChecked());
 						});
 
-						screen.addControl(new LSlider(60).setCentered(LControl.CenterOptions.HORIZONTAL), 5, 120, 100, 20);
+						w.addControl(new LSlider(60).setCentered(LControl.CenterOptions.HORIZONTAL), 5, 120, 100, 20);
 
 						w.addControl(screen);
 						LithiumPlugin.getInstance().getPlayerManager().getPlayer(e.getPlayer()).openInterface(w);
