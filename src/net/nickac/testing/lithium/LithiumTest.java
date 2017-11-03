@@ -61,13 +61,15 @@ public class LithiumTest extends JavaPlugin {
 						LTextBox txtName = new LTextBox();
 						LTextLabel label = new LTextLabel("Registration");
 
+						LCheckBox checkBox = new LCheckBox("Test");
+
+
+
 						screen.addControl(label, 0, 10, 100, 20);
 
 						screen2.addControl(new LTextLabel("Name: "), 5, 5, 200, 20);
 						screen2.addControl(txtName, 45, 0, 155, 20);
 
-						LCheckBox checkBox = new LCheckBox("Test");
-						//screen2.addControl(checkBox, 5, 40, 100, 20);
 
 						screen2.setLocation(new Point(0, 30));
 						screen2.setCentered(LControl.CenterOptions.HORIZONTAL);
@@ -93,6 +95,8 @@ public class LithiumTest extends JavaPlugin {
 							Bukkit.getPlayer(invoker).sendMessage("§4§lText from textbox: §6" + txtName.getText());
 							Bukkit.getPlayer(invoker).sendMessage("§4§lCheckBox checked ? §6" + checkBox.isChecked());
 						});
+
+						screen.addControl(new LSlider(60).setCentered(LControl.CenterOptions.HORIZONTAL), 5, 120, 100, 20);
 
 						w.addControl(screen);
 						LithiumPlugin.getInstance().getPlayerManager().getPlayer(e.getPlayer()).openInterface(w);

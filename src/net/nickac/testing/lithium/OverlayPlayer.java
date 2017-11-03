@@ -78,9 +78,9 @@ public class OverlayPlayer {
 	}
 
 	public void updateOverlay() {
-		labels[1].setText(ChatColor.GOLD + "Server Overlay Mod");
-		labels[2].setText(getOverlayLine(1));
-		labels[3].setText(getOverlayLine(2));
-		labels[4].setText(getOverlayLine(3));
+		labels[0].setText(ChatColor.GOLD + "Server Overlay Mod");
+		labels[1].setText(getOverlayLine(1));
+		labels[2].setText(getOverlayLine(2));
+		labels[3].setText(getOverlayLine(3));
 	}
 }
