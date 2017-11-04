@@ -56,6 +56,8 @@ public class OverlayPlayer {
 
 	private String getOverlayLine(int number) {
 		switch (number) {
+			case 0:
+				return ChatColor.GOLD + "Server Overlay Mod";
 			case 1:
 				return ChatColor.GRAY + "[" + ChatColor.GOLD + "X" + ChatColor.GRAY + "] " + handle.getLocation().getBlockX();
 			case 2:
@@ -78,9 +80,8 @@ public class OverlayPlayer {
 	}
 
 	public void updateOverlay() {
-		labels[0].setText(ChatColor.GOLD + "Server Overlay Mod");
-		labels[1].setText(getOverlayLine(1));
-		labels[2].setText(getOverlayLine(2));
-		labels[3].setText(getOverlayLine(3));
+		for (int i = 0; i < labels.length; i++) {
+			labels[i].setText(getOverlayLine(i));
+		}
 	}
 }
