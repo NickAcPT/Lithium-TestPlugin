@@ -83,10 +83,8 @@ public class LithiumTest extends JavaPlugin {
 						LSlider lSlider = new LSlider(60);
 						screen.addControl(lSlider.setCentered(LControl.CenterOptions.HORIZONTAL), 5, 130, 100, 20);
 
-
-						LSlider lSlider2 = new LSlider(50);
-						lSlider2.setSliderType(LSlider.SliderType.VERTICAL);
-						screen.addControl(lSlider2, 5, 10, 20, 100);
+						LImage img = new LImage("https://minotar.net/helm/" + e.getPlayer().getName() + "/100.png");
+						w.addControl(img, 0, 0, 50, 50);
 
 						btnSave.onButtonClick((sender, invoker) -> {
 							Bukkit.getPlayer(invoker).sendMessage("§4§lText from textbox: §6" + txtName.getText());

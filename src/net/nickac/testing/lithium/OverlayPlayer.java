@@ -24,6 +24,7 @@
 
 package net.nickac.testing.lithium;
 
+import net.nickac.lithium.backend.controls.impl.LImage;
 import net.nickac.lithium.backend.controls.impl.LOverlay;
 import net.nickac.lithium.backend.controls.impl.LTextLabel;
 import net.nickac.lithium.backend.other.objects.Point;
@@ -73,6 +74,8 @@ public class OverlayPlayer {
 		labels[1] = (LTextLabel) new LTextLabel(getOverlayLine(1)).setLocation(new Point(0, 20));
 		labels[2] = (LTextLabel) new LTextLabel(getOverlayLine(2)).setLocation(new Point(0, 30));
 		labels[3] = (LTextLabel) new LTextLabel(getOverlayLine(3)).setLocation(new Point(0, 40));
+		LImage img = new LImage("https://minotar.net/helm/" + handle.getName() + "/100.png");
+		o.addControl(img, 0, 60, 50, 50);
 		for (int i = 0; i < labels.length; i++) {
 			o.addControl(labels[i]);
 		}
