@@ -1,9 +1,10 @@
 package net.nickac.testing.lithium;
 
-import net.nickac.lithium.backend.controls.LControl;
-import net.nickac.lithium.backend.controls.impl.*;
-import net.nickac.lithium.backend.other.objects.Point;
+import net.nickac.lithium.backend.controls.impl.LImage;
+import net.nickac.lithium.backend.controls.impl.LPanel;
+import net.nickac.lithium.backend.controls.impl.LWindow;
 import net.nickac.lithium.frontend.LithiumPlugin;
+import net.nickac.testing.lithium.exampleElements.TextPanel;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.event.EventHandler;
@@ -22,94 +23,65 @@ import java.util.UUID;
  */
 public class LithiumTest extends JavaPlugin {
 
-	private Map<UUID, OverlayPlayer> overlayPlayers = new HashMap<>();
+    private Map<UUID, OverlayPlayer> overlayPlayers = new HashMap<>();
 
-	@Override
-	public void onEnable() {
+    @Override
+    public void onEnable() {
 
-		Bukkit.getPluginManager().registerEvents(new Listener() {
+        Bukkit.getPluginManager().registerEvents(new Listener() {
 
-			@EventHandler
-			public void on(PlayerMoveEvent e) {
-				try {
-					overlayPlayers.get(e.getPlayer().getUniqueId()).updateOverlay();
-				} catch (NullPointerException ignored) {
-				}
-			}
-
-
-			@EventHandler
-			public void on(PlayerQuitEvent e) {
-				overlayPlayers.remove(e.getPlayer().getUniqueId());
-			}
+            @EventHandler
+            public void on(PlayerMoveEvent e) {
+                try {
+                    overlayPlayers.get(e.getPlayer().getUniqueId()).updateOverlay();
+                } catch (NullPointerException ignored) {
+                }
+            }
 
 
-		}, this);
+            @EventHandler
+            public void on(PlayerQuitEvent e) {
+                overlayPlayers.remove(e.getPlayer().getUniqueId());
+            }
 
 
-		Bukkit.getPluginManager().registerEvents(new Listener() {
-
-			@EventHandler
-			public void on(PlayerCommandPreprocessEvent e) {
-				if (e.getMessage().equals("/lithiumtest")) {
-					e.setCancelled(true);
-					if (LithiumPlugin.getInstance().getPlayerManager().isUsingLithium(e.getPlayer())) {
-						LWindow w = new LWindow();
-
-						LPanel screen = new LPanel();
-						LPanel screen2 = new LPanel();
-
-						LTextBox txtName = new LTextBox();
-						LTextLabel label = new LTextLabel("Registration");
-
-						screen.addControl(label, 0, 10, 100, 20);
-
-						screen2.addControl(new LTextLabel("Name: "), 5, 5, 200, 20);
-						screen2.addControl(txtName, 45, 0, 155, 20);
-
-						screen2.setLocation(new Point(0, 30));
-						screen2.setCentered(LControl.CenterOptions.HORIZONTAL);
-
-						screen.setCentered(LControl.CenterOptions.HORIZONTAL_VERTICAL);
-						label.setCentered(LControl.CenterOptions.HORIZONTAL);
-						screen.addControl(screen2);
-						txtName.setPasswordField(true);
-
-						LButton btnSave = new LButton("Save");
-						screen.addControl(btnSave, 0, 100, 50, 20);
-						btnSave.setCentered(LControl.CenterOptions.HORIZONTAL);
+        }, this);
 
 
-						LSlider lSlider = new LSlider(60);
-						screen.addControl(lSlider.setCentered(LControl.CenterOptions.HORIZONTAL), 5, 130, 100, 20);
+        Bukkit.getPluginManager().registerEvents(new Listener() {
 
-						LImage img = new LImage("https://minotar.net/helm/" + e.getPlayer().getName() + "/100.png");
-						w.addControl(img, 0, 0, 50, 50);
+            @EventHandler
+            public void on(PlayerCommandPreprocessEvent e) {
+                if (e.getMessage().equals("/lithiumtest")) {
+                    e.setCancelled(true);
+                    if (LithiumPlugin.getInstance().getPlayerManager().isUsingLithium(e.getPlayer())) {
+                        LWindow w = new LWindow();
 
-						btnSave.onButtonClick((sender, invoker) -> {
-							Bukkit.getPlayer(invoker).sendMessage("§4§lText from textbox: §6" + txtName.getText());
-							Bukkit.getPlayer(invoker).sendMessage("§4§lSlider Value ? §6" + lSlider.getValue());
-						});
+                        LPanel textPanel = new TextPanel();
 
 
-						w.addControl(screen);
-						LithiumPlugin.getInstance().getPlayerManager().getPlayer(e.getPlayer()).openInterface(w);
-					}
-				} else if (e.getMessage().equals("/overlaytest")) {
-					e.setCancelled(true);
-					if (LithiumPlugin.getInstance().getPlayerManager().isUsingLithium(e.getPlayer())) {
-						if (overlayPlayers.containsKey(e.getPlayer().getUniqueId())) {
-							e.getPlayer().sendMessage(ChatColor.RED + "You already have the overlay!");
-							return;
-						}
-						OverlayPlayer pl = new OverlayPlayer(e.getPlayer());
-						overlayPlayers.put(e.getPlayer().getUniqueId(), pl);
-					} else {
-						e.getPlayer().sendMessage(ChatColor.RED + "You must be using Lithium in order to see the overlay!");
-					}
-				}
-			}
+                        LImage img = new LImage("https://minotar.net/helm/" + e.getPlayer().getName() + "/100.png");
+                        w.addControl(img, 0, 0, 50, 50);
 
-		}, this);
-	}
+
+                        w.addControl(textPanel);
+                        LithiumPlugin.getInstance().getPlayerManager().getPlayer(e.getPlayer()).openInterface(w);
+                    }
+                } else if (e.getMessage().equals("/overlaytest")) {
+                    e.setCancelled(true);
+                    if (LithiumPlugin.getInstance().getPlayerManager().isUsingLithium(e.getPlayer())) {
+                        if (overlayPlayers.containsKey(e.getPlayer().getUniqueId())) {
+                            e.getPlayer().sendMessage(ChatColor.RED + "You already have the overlay!");
+                            return;
+                        }
+                        OverlayPlayer pl = new OverlayPlayer(e.getPlayer());
+                        overlayPlayers.put(e.getPlayer().getUniqueId(), pl);
+                    } else {
+                        e.getPlayer().sendMessage(ChatColor.RED + "You must be using Lithium in order to see the overlay!");
+                    }
+                }
+            }
+
+        }, this);
+    }
 }

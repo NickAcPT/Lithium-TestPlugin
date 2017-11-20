@@ -24,67 +24,58 @@
 
 package net.nickac.testing.lithium;
 
+import net.nickac.lithium.backend.controls.LControl;
 import net.nickac.lithium.backend.controls.impl.LImage;
 import net.nickac.lithium.backend.controls.impl.LOverlay;
 import net.nickac.lithium.backend.controls.impl.LTextLabel;
 import net.nickac.lithium.backend.other.objects.Point;
 import net.nickac.lithium.frontend.LithiumPlugin;
+import net.nickac.testing.lithium.exampleElements.UpdateableText;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Criado por NickAc em 09:11 AM 18/10/2017
  */
 public class OverlayPlayer {
-	private Player handle;
-	private LOverlay o = new LOverlay();
-	private final int numberLines = 4;
-	private LTextLabel[] labels = new LTextLabel[numberLines];
+    private Player handle;
+    private LOverlay o = new LOverlay();
+    private List<UpdateableText> labels = new ArrayList<>();
 
-	public OverlayPlayer(Player handle) {
-		this.handle = handle;
-		if (LithiumPlugin.getInstance().getPlayerManager().getPlayer(handle).isUsingLithium())
-			startOverlaying();
-	}
+    public OverlayPlayer(Player handle) {
+        this.handle = handle;
+        if (LithiumPlugin.getInstance().getPlayerManager().getPlayer(handle).isUsingLithium())
+            startOverlaying();
+    }
 
-	public Player getHandle() {
-		return handle;
-	}
+    private void startOverlaying() {
 
-	public LTextLabel[] getLabels() {
-		return labels;
-	}
+        labels.add(UpdateableText.wrap(()-> ChatColor.GRAY + "[" + ChatColor.GOLD + "X" + ChatColor.GRAY + "] " + handle.getLocation().getBlockX()));
+        labels.add(UpdateableText.wrap(()-> ChatColor.GRAY + "[" + ChatColor.GOLD + "Y" + ChatColor.GRAY + "] " + handle.getLocation().getBlockY()));
+        labels.add(UpdateableText.wrap(()-> ChatColor.GRAY + "[" + ChatColor.GOLD + "Z" + ChatColor.GRAY + "] " + handle.getLocation().getBlockZ()));
 
-	private String getOverlayLine(int number) {
-		switch (number) {
-			case 0:
-				return ChatColor.GOLD + "Server Overlay Mod";
-			case 1:
-				return ChatColor.GRAY + "[" + ChatColor.GOLD + "X" + ChatColor.GRAY + "] " + handle.getLocation().getBlockX();
-			case 2:
-				return ChatColor.GRAY + "[" + ChatColor.GOLD + "Y" + ChatColor.GRAY + "] " + handle.getLocation().getBlockY();
-			case 3:
-				return ChatColor.GRAY + "[" + ChatColor.GOLD + "Z" + ChatColor.GRAY + "] " + handle.getLocation().getBlockZ();
-		}
-		return "";
-	}
 
-	private void startOverlaying() {
-		labels[0] = new LTextLabel(ChatColor.GOLD + "Server Overlay Mod");
-		labels[1] = (LTextLabel) new LTextLabel(getOverlayLine(1)).setLocation(new Point(0, 20));
-		labels[2] = (LTextLabel) new LTextLabel(getOverlayLine(2)).setLocation(new Point(0, 30));
-		labels[3] = (LTextLabel) new LTextLabel(getOverlayLine(3)).setLocation(new Point(0, 40));
-		LImage img = new LImage("https://minotar.net/helm/" + handle.getName() + "/100.png");
-		o.addControl(img, 0, 60, 50, 50);
-		for (int i = 0; i < labels.length; i++) {
-			o.addControl(labels[i]);
-		}
-		LithiumPlugin.getInstance().getPlayerManager().getPlayer(handle).openOverlay(o);
-	}
+        LTextLabel viewName = new LTextLabel(ChatColor.GOLD + "Server Overlay Mod");
+        o.addControl(viewName,0,5,20,20);
+        LImage img = new LImage("https://minotar.net/helm/" + handle.getName() + "/100.png");
+        o.addControl(img, 5, viewName.getBottom()+5, 20, 20);
 
-	public void updateOverlay() {
-		for (int i = 0; i < labels.length; i++) {
-			labels[i].setText(getOverlayLine(i));
-		}
-	}
+        final int[] index = {0};
+        labels.forEach(updateableText -> {
+            o.addControl((LControl) updateableText.getlTextLabel().setLocation(new Point(0, img.getBottom() + 5 + index[0]++ * 10)));
+        });
+
+        LithiumPlugin.getInstance().getPlayerManager().getPlayer(handle).openOverlay(o);
+    }
+
+    public Player getHandle() {
+        return handle;
+    }
+
+    public void updateOverlay() {
+        labels.forEach(UpdateableText::updateText);
+    }
 }
