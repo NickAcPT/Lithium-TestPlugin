@@ -12,30 +12,30 @@ import java.util.UUID;
 /**
  * Created by ysl3000
  */
-public class TextPanel extends LPanel{
+public class TextPanel {
 
-
+    private LPanel rootPane;
     private InputPanel inputPanel;
 
-    public TextPanel(){
-        super();
+    public TextPanel() {
+        this.rootPane = new LPanel();
 
 
         LTextLabel label = new LTextLabel("Registration");
 
-        this.addControl(label, 0, 10, 100, 20);
-
-        this.inputPanel = new InputPanel();
+        rootPane.addControl(label, 0, 10, 100, 20);
 
         label.setCentered(LControl.CenterOptions.HORIZONTAL);
-        this.addControl(inputPanel);
+        this.inputPanel = new InputPanel("Name");
+        this.inputPanel.getInputPanel().setCentered(LControl.CenterOptions.HORIZONTAL);
+        rootPane.addControl(inputPanel.getInputPanel(), 0, label.getBottom() + 5, 80, 20);
         this.inputPanel.setPasswordPanel(true);
 
+
         LSlider lSlider = new LSlider(60);
-        this.addControl(lSlider.setCentered(LControl.CenterOptions.HORIZONTAL), 5, 130, 100, 20);
+        rootPane.addControl(lSlider.setCentered(LControl.CenterOptions.HORIZONTAL), 5, inputPanel.getInputPanel().getBottom() + 5, 100, 20);
 
-
-        LPanel okCancelPanel = new OkCancelPanel(new AbstractButtonAnswer("Save") {
+        OkCancelPanel okCancelPanel = new OkCancelPanel(new AbstractButtonAnswer("Save") {
             @Override
             public void handleEvent(LButton lButton, UUID uuid) {
                 Bukkit.getPlayer(uuid).sendMessage("§4§lText from textbox: §6" + TextPanel.this.inputPanel.getText());
@@ -43,8 +43,11 @@ public class TextPanel extends LPanel{
             }
         }, new CloseAnswer());
 
-        this.addControl(okCancelPanel, 0, 0, 155, 40);
-        this.refresh();
+        rootPane.addControl(okCancelPanel.getOkCancelPanel(), 0, 0, 155, 40);
 
+    }
+
+    public LPanel getRootPane() {
+        return rootPane;
     }
 }

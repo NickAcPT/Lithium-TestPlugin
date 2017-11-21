@@ -1,7 +1,6 @@
 package net.nickac.testing.lithium;
 
 import net.nickac.lithium.backend.controls.impl.LImage;
-import net.nickac.lithium.backend.controls.impl.LPanel;
 import net.nickac.lithium.backend.controls.impl.LWindow;
 import net.nickac.lithium.frontend.LithiumPlugin;
 import net.nickac.testing.lithium.exampleElements.TextPanel;
@@ -57,14 +56,14 @@ public class LithiumTest extends JavaPlugin {
                     if (LithiumPlugin.getInstance().getPlayerManager().isUsingLithium(e.getPlayer())) {
                         LWindow w = new LWindow();
 
-                        LPanel textPanel = new TextPanel();
+                        TextPanel textPanel = new TextPanel();
 
 
                         LImage img = new LImage("https://minotar.net/helm/" + e.getPlayer().getName() + "/100.png");
                         w.addControl(img, 0, 0, 50, 50);
 
 
-                        w.addControl(textPanel);
+                        w.addControl(textPanel.getRootPane());
                         LithiumPlugin.getInstance().getPlayerManager().getPlayer(e.getPlayer()).openInterface(w);
                     }
                 } else if (e.getMessage().equals("/overlaytest")) {

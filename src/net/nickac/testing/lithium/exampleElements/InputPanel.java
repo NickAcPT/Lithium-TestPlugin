@@ -7,15 +7,16 @@ import net.nickac.lithium.backend.controls.impl.LTextLabel;
 /**
  * Created by ysl3000
  */
-public class InputPanel extends LPanel{
+public class InputPanel{
 
+    private LPanel inputPanel;
     private LTextBox textBox;
 
-    public InputPanel(){
-        super();
+    public InputPanel(String label){
+        this.inputPanel= new LPanel();
         this.textBox= new LTextBox();
-        this.addControl(new LTextLabel("Name: "), 5, 5, 10, 20);
-        this.addControl(this.textBox, 45, 0, 155, 20);
+        inputPanel.addControl(new LTextLabel(label+": "), 5, 5, 10, 20);
+        inputPanel.addControl(this.textBox, 45, 0, 155, 20);
     }
 
     public String getText(){
@@ -31,4 +32,7 @@ public class InputPanel extends LPanel{
         this.textBox.setPasswordField(isPasswordPanel);
     }
 
+    public LPanel getInputPanel() {
+        return inputPanel;
+    }
 }

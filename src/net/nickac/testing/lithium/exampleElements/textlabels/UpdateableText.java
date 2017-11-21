@@ -1,4 +1,4 @@
-package net.nickac.testing.lithium.exampleElements;
+package net.nickac.testing.lithium.exampleElements.textlabels;
 
 import net.nickac.lithium.backend.controls.impl.LTextLabel;
 

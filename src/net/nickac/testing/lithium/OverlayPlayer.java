@@ -30,7 +30,7 @@ import net.nickac.lithium.backend.controls.impl.LOverlay;
 import net.nickac.lithium.backend.controls.impl.LTextLabel;
 import net.nickac.lithium.backend.other.objects.Point;
 import net.nickac.lithium.frontend.LithiumPlugin;
-import net.nickac.testing.lithium.exampleElements.UpdateableText;
+import net.nickac.testing.lithium.exampleElements.textlabels.UpdateableText;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
