@@ -45,7 +45,7 @@ public class OverlayPlayer {
     private LOverlay o = new LOverlay();
     private List<UpdateableText> labels = new ArrayList<>();
 
-    public OverlayPlayer(Player handle) {
+    OverlayPlayer(Player handle) {
         this.handle = handle;
         if (LithiumPlugin.getInstance().getPlayerManager().getPlayer(handle).isUsingLithium())
             startOverlaying();
@@ -64,9 +64,7 @@ public class OverlayPlayer {
         o.addControl(img, 5, viewName.getBottom()+5, 20, 20);
 
         final int[] index = {0};
-        labels.forEach(updateableText -> {
-            o.addControl((LControl) updateableText.getlTextLabel().setLocation(new Point(0, img.getBottom() + 5 + index[0]++ * 10)));
-        });
+        labels.forEach(updatableText -> o.addControl((LControl) updatableText.getlTextLabel().setLocation(new Point(0, img.getBottom() + 5 + index[0]++ * 10))));
 
         LithiumPlugin.getInstance().getPlayerManager().getPlayer(handle).openOverlay(o);
     }

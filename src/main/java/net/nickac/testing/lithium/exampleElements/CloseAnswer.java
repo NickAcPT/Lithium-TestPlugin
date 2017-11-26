@@ -10,7 +10,7 @@ import java.util.UUID;
  * Created by ysl3000
  */
 public class CloseAnswer extends AbstractButtonAnswer {
-    public CloseAnswer() {
+    CloseAnswer() {
         super("Cancel");
     }
 

@@ -28,7 +28,7 @@ public class UpdateableText {
     }
 
     @FunctionalInterface
-    public static interface TextUpdater {
+    public interface TextUpdater {
         String getText();
     }
 

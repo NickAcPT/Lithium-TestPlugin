@@ -12,7 +12,7 @@ public class InputPanel{
     private LPanel inputPanel;
     private LTextBox textBox;
 
-    public InputPanel(String label){
+    InputPanel(String label){
         this.inputPanel= new LPanel();
         this.textBox= new LTextBox();
         inputPanel.addControl(new LTextLabel(label+": "), 5, 5, 10, 20);

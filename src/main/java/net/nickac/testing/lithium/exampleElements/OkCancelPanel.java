@@ -15,7 +15,7 @@ public class OkCancelPanel {
     private LButton cancelButton;
 
 
-    public OkCancelPanel(ButtonAnswer positiveAnswer, ButtonAnswer negativeAnswer) {
+    OkCancelPanel(ButtonAnswer positiveAnswer, ButtonAnswer negativeAnswer) {
             this.okCancelPanel = new LPanel();
 
         this.okButton = new LButton(positiveAnswer.getButtonLabel());
