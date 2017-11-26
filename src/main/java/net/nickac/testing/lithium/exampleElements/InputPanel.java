@@ -1,5 +1,6 @@
 package net.nickac.testing.lithium.exampleElements;
 
+import net.nickac.lithium.backend.controls.LControl;
 import net.nickac.lithium.backend.controls.impl.LPanel;
 import net.nickac.lithium.backend.controls.impl.LTextBox;
 import net.nickac.lithium.backend.controls.impl.LTextLabel;
@@ -11,12 +12,16 @@ public class InputPanel{
 
     private LPanel inputPanel;
     private LTextBox textBox;
+    private LTextLabel label;
 
     InputPanel(String label){
         this.inputPanel= new LPanel();
         this.textBox= new LTextBox();
-        inputPanel.addControl(new LTextLabel(label+": "), 5, 5, 10, 20);
-        inputPanel.addControl(this.textBox, 45, 0, 155, 20);
+        this.textBox.setCentered(LControl.CenterOptions.VERTICAL);
+        this.label= new LTextLabel(label+":");
+        this.label.setCentered(LControl.CenterOptions.VERTICAL);
+        inputPanel.addControl(this.label, 0, 0, label.length(), 20);
+        inputPanel.addControl(this.textBox, this.label.getRight()+5, 0, 155, 20);
     }
 
     public String getText(){
