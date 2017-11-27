@@ -58,6 +58,8 @@ public class LithiumTest extends JavaPlugin {
 
                             w.addControl(textPanel.getRootPane());
                             LithiumPlugin.getInstance().getPlayerManager().getPlayer(e.getPlayer()).openInterface(w);
+                        } else {
+                            e.getPlayer().sendMessage(ChatColor.RED + "You must be using Lithium in order to see the overlay!");
                         }
                     } else if (e.getMessage().equals("/overlaytest")) {
                         e.setCancelled(true);
