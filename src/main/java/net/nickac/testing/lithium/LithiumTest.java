@@ -6,6 +6,7 @@ import net.nickac.lithium.frontend.LithiumPlugin;
 import net.nickac.testing.lithium.exampleElements.TextPanel;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
@@ -59,7 +60,7 @@ public class LithiumTest extends JavaPlugin {
                             w.addControl(textPanel.getRootPane());
                             LithiumPlugin.getInstance().getPlayerManager().getPlayer(e.getPlayer()).openInterface(w);
                         } else {
-                            e.getPlayer().sendMessage(ChatColor.RED + "You must be using Lithium in order to see the overlay!");
+                            errorMessage(e.getPlayer(),"UI");
                         }
                     } else if (e.getMessage().equals("/overlaytest")) {
                         e.setCancelled(true);
@@ -71,11 +72,16 @@ public class LithiumTest extends JavaPlugin {
                             OverlayPlayer pl = new OverlayPlayer(e.getPlayer());
                             overlayPlayers.put(e.getPlayer().getUniqueId(), pl);
                         } else {
-                            e.getPlayer().sendMessage(ChatColor.RED + "You must be using Lithium in order to see the overlay!");
+                            errorMessage(e.getPlayer(),"overlay");
                         }
                     }
                 }
 
             }, this);
         }
+
+        private void errorMessage(Player player,String key){
+            player.sendMessage(ChatColor.RED + "You must be using Lithium in order to see the "+key+"!");
+        }
+
     }
