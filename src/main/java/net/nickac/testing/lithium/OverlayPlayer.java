@@ -45,9 +45,9 @@ public class OverlayPlayer {
     private LOverlay o = new LOverlay();
     private List<UpdateableText> labels = new ArrayList<>();
 
-    public OverlayPlayer(Player handle) {
+    OverlayPlayer(Player handle) {
         this.handle = handle;
-        if (LithiumPlugin.getInstance().getPlayerManager().getPlayer(handle).isUsingLithium())
+        if (LithiumPlugin.getInstance().getPlayerManager().isUsingLithium(handle))
             startOverlaying();
     }
 
@@ -61,14 +61,12 @@ public class OverlayPlayer {
         LTextLabel viewName = new LTextLabel(ChatColor.GOLD + "Server Overlay Mod");
         o.addControl(viewName,0,5,20,20);
         LImage img = new LImage("https://minotar.net/helm/" + handle.getName() + "/100.png");
-        o.addControl(img, 5, viewName.getBottom()+5, 20, 20);
+        o.addControl(img, 5, 30, 20, 20);
 
         final int[] index = {0};
-        labels.forEach(updateableText -> {
-            o.addControl((LControl) updateableText.getlTextLabel().setLocation(new Point(0, img.getBottom() + 5 + index[0]++ * 10)));
-        });
+        labels.forEach(updatableText -> o.addControl((LControl) updatableText.getlTextLabel().setLocation(new Point(0, img.getBottom() + 5 + index[0]++ * 10))));
 
-        LithiumPlugin.getInstance().getPlayerManager().getPlayer(handle).openOverlay(o);
+        LithiumPlugin.getInstance().getPlayerManager().getPlayer(handle).openContainer(o);
     }
 
     public Player getHandle() {
