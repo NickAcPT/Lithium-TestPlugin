@@ -1,6 +1,6 @@
 package net.nickac.testing.lithium.exampleElements;
 
-import net.nickac.lithium.backend.controls.LControl;
+import net.nickac.lithium.backend.controls.CenterOptions;
 import net.nickac.lithium.backend.controls.impl.LPanel;
 import net.nickac.lithium.backend.controls.impl.LTextBox;
 import net.nickac.lithium.backend.controls.impl.LTextLabel;
@@ -17,9 +17,9 @@ public class InputPanel{
     InputPanel(String label){
         this.inputPanel= new LPanel();
         this.textBox= new LTextBox();
-        this.textBox.setCentered(LControl.CenterOptions.VERTICAL);
+        this.textBox.setCentered(CenterOptions.VERTICAL);
         this.label= new LTextLabel(label+":");
-        this.label.setCentered(LControl.CenterOptions.VERTICAL);
+        this.label.setCentered(CenterOptions.VERTICAL);
         inputPanel.addControl(this.label, 0, 0, label.length(), 20);
         inputPanel.addControl(this.textBox, this.label.getRight()+5, 0, 155, 20);
     }

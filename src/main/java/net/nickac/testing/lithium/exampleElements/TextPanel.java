@@ -1,6 +1,6 @@
 package net.nickac.testing.lithium.exampleElements;
 
-import net.nickac.lithium.backend.controls.LControl;
+import net.nickac.lithium.backend.controls.CenterOptions;
 import net.nickac.lithium.backend.controls.impl.LButton;
 import net.nickac.lithium.backend.controls.impl.LPanel;
 import net.nickac.lithium.backend.controls.impl.LSlider;
@@ -25,19 +25,19 @@ public class TextPanel {
 
         rootPane.addControl(label, 0, 10, 100, 20);
 
-        label.setCentered(LControl.CenterOptions.HORIZONTAL);
+        label.setCentered(CenterOptions.HORIZONTAL);
 
         this.name = new InputPanel("Name");
-        this.name.getInputPanel().setCentered(LControl.CenterOptions.HORIZONTAL);
+        this.name.getInputPanel().setCentered(CenterOptions.HORIZONTAL);
         rootPane.addControl(name.getInputPanel(), 0, label.getBottom() + 5, 80, 20);
 
         this.inputPanel = new InputPanel("Password");
-        this.inputPanel.getInputPanel().setCentered(LControl.CenterOptions.HORIZONTAL);
+        this.inputPanel.getInputPanel().setCentered(CenterOptions.HORIZONTAL);
         this.inputPanel.setPasswordPanel(true);
         rootPane.addControl(inputPanel.getInputPanel(),0,name.getInputPanel().getBottom()+5,80,20);
 
         LSlider lSlider = new LSlider(60);
-        rootPane.addControl(lSlider.setCentered(LControl.CenterOptions.HORIZONTAL), 5, inputPanel.getInputPanel().getBottom() + 5, 100, 20);
+        rootPane.addControl(lSlider.setCentered(CenterOptions.HORIZONTAL), 5, inputPanel.getInputPanel().getBottom() + 5, 100, 20);
 
         OkCancelPanel okCancelPanel = new OkCancelPanel(new AbstractButtonAnswer("Register") {
             @Override

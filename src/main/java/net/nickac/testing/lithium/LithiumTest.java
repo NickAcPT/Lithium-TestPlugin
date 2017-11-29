@@ -58,7 +58,7 @@ public class LithiumTest extends JavaPlugin {
 
 
                             w.addControl(textPanel.getRootPane());
-                            LithiumPlugin.getInstance().getPlayerManager().getPlayer(e.getPlayer()).openInterface(w);
+                            LithiumPlugin.getInstance().getPlayerManager().getPlayer(e.getPlayer()).openContainer(w);
                         } else {
                             errorMessage(e.getPlayer(),"UI");
                         }
