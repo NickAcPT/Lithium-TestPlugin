@@ -61,7 +61,7 @@ public class OverlayPlayer {
         LTextLabel viewName = new LTextLabel(ChatColor.GOLD + "Server Overlay Mod");
         o.addControl(viewName,0,5,20,20);
         LImage img = new LImage("https://minotar.net/helm/" + handle.getName() + "/100.png");
-        o.addControl(img, 5, viewName.getBottom()+5, 20, 20);
+        o.addControl(img, 5, 30, 20, 20);
 
         final int[] index = {0};
         labels.forEach(updatableText -> o.addControl((LControl) updatableText.getlTextLabel().setLocation(new Point(0, img.getBottom() + 5 + index[0]++ * 10))));

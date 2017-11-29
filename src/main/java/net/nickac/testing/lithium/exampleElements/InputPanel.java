@@ -20,8 +20,8 @@ public class InputPanel{
         this.textBox.setCentered(CenterOptions.VERTICAL);
         this.label= new LTextLabel(label+":");
         this.label.setCentered(CenterOptions.VERTICAL);
-        inputPanel.addControl(this.label, 0, 0, label.length(), 20);
-        inputPanel.addControl(this.textBox, this.label.getRight()+5, 0, 155, 20);
+        inputPanel.addControl(this.label, 0, 0, 20, 20);
+        inputPanel.addControl(this.textBox, 25, 0, 155, 20);
     }
 
     public String getText(){

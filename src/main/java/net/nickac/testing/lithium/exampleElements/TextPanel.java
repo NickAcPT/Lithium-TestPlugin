@@ -29,15 +29,15 @@ public class TextPanel {
 
         this.name = new InputPanel("Name");
         this.name.getInputPanel().setCentered(CenterOptions.HORIZONTAL);
-        rootPane.addControl(name.getInputPanel(), 0, label.getBottom() + 5, 80, 20);
+        rootPane.addControl(name.getInputPanel(), 0, 35, 80, 20);
 
         this.inputPanel = new InputPanel("Password");
         this.inputPanel.getInputPanel().setCentered(CenterOptions.HORIZONTAL);
         this.inputPanel.setPasswordPanel(true);
-        rootPane.addControl(inputPanel.getInputPanel(),0,name.getInputPanel().getBottom()+5,80,20);
+        rootPane.addControl(inputPanel.getInputPanel(),0,55,80,20);
 
         LSlider lSlider = new LSlider(60);
-        rootPane.addControl(lSlider.setCentered(CenterOptions.HORIZONTAL), 5, inputPanel.getInputPanel().getBottom() + 5, 100, 20);
+        rootPane.addControl(lSlider.setCentered(CenterOptions.HORIZONTAL), 5, 75, 100, 20);
 
         OkCancelPanel okCancelPanel = new OkCancelPanel(new AbstractButtonAnswer("Register") {
             @Override
@@ -47,7 +47,7 @@ public class TextPanel {
             }
         }, new CloseAnswer());
 
-        rootPane.addControl(okCancelPanel.getOkCancelPanel(), 0, lSlider.getBottom()+5, 155, 40);
+        rootPane.addControl(okCancelPanel.getOkCancelPanel(), 0, 95, 155, 40);
 
     }
 
